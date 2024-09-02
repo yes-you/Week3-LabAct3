@@ -1,0 +1,77 @@
+<?php
+
+class Vehicle {
+    protected $make;
+    protected $model;
+    protected $year;
+
+    public function __construct($make, $model, $year){
+        $this->make = $make;
+        $this->model = $model;
+        $this->year = $year;
+    }
+
+    final public function getDetails() {
+        $vehicleInfo = $this->make . ' ' . $this->model . ' (' . $this->year . ') ';
+        return $vehicleInfo;
+    }
+}
+
+class Car extends Vehicle { 
+    protected $doors;
+
+    public function describe() {
+        echo "This is a Car.<br>";
+    }
+
+    public function doorCount() {  
+        $doors = 2; 
+        return $doors;    
+    }
+}
+
+interface ElectricVehicle {
+    public function chargeBattery();
+}
+
+class ElectricCar extends Car implements ElectricVehicle {
+    public function describe() {
+        echo "This is an Electric Car.<br>";
+    }
+
+    public function chargeBattery() {
+        echo "Battery 20%: Charge battery.<br>";
+    }
+}
+
+final class Motorcycle extends Vehicle {
+    protected $color;
+    
+    public function describe() {
+        echo "This is a motorcycle.<br>";
+    }
+
+    public function motorColor() {
+        $color = "Red";
+        return $color;
+    }
+}
+
+$car = new Car("Porche", "911", 1983);
+$eCar = new ElectricCar("Tesla", "Model S", 2020);
+$motor = new Motorcycle("Yamaha", "Mio", 2022);
+
+$car->describe();
+echo $car->getDetails() . "<br>";
+echo 'No. of doors ' . $car->doorCount() . '.<br><br>';
+
+$eCar->describe();
+echo $eCar->getDetails() . "<br>";
+echo $eCar->chargeBattery() . "<br><br>";
+
+
+$motor->describe();
+echo $motor->getDetails() . "<br>";
+echo 'Vehicle color: ' . $motor->motorColor() . "<br><br>";
+
+?>
